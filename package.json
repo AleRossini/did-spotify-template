@@ -3,6 +3,9 @@
   "name": "spotify-artist-battle-app",
   "description": "Battle Artsits to see who is the best!",
   "version": "0.0.1",
+  "scripts": {
+  "start": "node app.js"
+  },
   "dependencies": {
     "express": "~4.16.0"
   }
