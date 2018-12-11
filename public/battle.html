@@ -5,7 +5,20 @@
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
   </head>
   <body>
-    <div class="container">
+    <section>
+      <div class="wrapper">
+          <input id="typedArtistName" type="text" value="">
+          <button id="sendArtistName">Get Tracks</button>
+        <ul >
+          <li id="artists"></li>
+        </ul>
+        <ul id="songs">
+          <li></li>
+        </ul>
+        <button onclick="check()">Dance, baby!</button>
+      </div>
+    </section>
     <div id="user-profile"></div>
     <script type="module" src="/js/pages/battle.js"></script>
+  </body>
 </html>
