@@ -3,22 +3,21 @@
   <head>
     <title>Spotify Artist Battle Template</title>
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" type="text/css" href="css/style.css" charset="utf-8">
   </head>
   <body>
     <section>
-      <div class="wrapper">
+      <div class="container">
+        <div id="user-profile"></div>
           <input id="typedArtistName" type="text" value="">
           <button id="sendArtistName">Get Tracks</button>
-        <ul >
-          <li id="artists"></li>
-        </ul>
-        <ul id="songs">
-          <li></li>
-        </ul>
+        <form>
+          <ul id="artistTopTracks"></ul>
+        </form>
         <button onclick="check()">Dance, baby!</button>
       </div>
     </section>
-    <div id="user-profile"></div>
     <script type="module" src="/js/pages/battle.js"></script>
   </body>
 </html>

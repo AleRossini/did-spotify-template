@@ -4,12 +4,17 @@
   "description": "Battle Artsits to see who is the best!",
   "version": "0.0.1",
   "scripts": {
-    "start": "node app.js"
+    "start": "node app.js",
+    "test": "jest"
   },
   "dependencies": {
     "express": "~4.16.0"
   },
   "devDependencies": {
+    "babel": "^6.23.0",
+    "babel-jest": "^23.6.0",
+    "babel-polyfill": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
     "jest": "^23.6.0"
   }
 }
