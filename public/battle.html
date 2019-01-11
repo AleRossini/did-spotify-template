@@ -4,18 +4,33 @@
     <title>Spotify Artist Battle Template</title>
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
     <!-- Custom CSS -->
-    <link rel="stylesheet" type="text/css" href="css/style.css" charset="utf-8">
+    <link rel="stylesheet" href="../css/style.css">
   </head>
   <body>
     <section>
       <div class="container">
-        <div id="user-profile"></div>
-          <input id="typedArtistName" type="text" value="">
-          <button id="sendArtistName">Get Tracks</button>
-        <form>
-          <ul id="artistTopTracks"></ul>
-        </form>
-        <button onclick="check()">Dance, baby!</button>
+        <div class="row">
+          <div id="user-profile"></div>
+        </div>
+        <div class="row">
+          <div class="col-6">
+            <input id="typedArtistName" type="text" value="">
+            <button id="sendArtistName">Get Tracks</button>
+          <form>
+            <ul id="artistTopTracks"></ul>
+          </form>
+          </div>
+          <div class="col-6">
+            <input id="typedArtistName" type="text" value="">
+            <button id="sendArtistName">Get Tracks</button>
+          <form>
+            <ul id="artistTopTracks"></ul>
+          </form>
+          </div>
+        </div>
+        <div class="row">
+          <button onclick="check()">Dance, baby!</button>
+        </div>        
       </div>
     </section>
     <script type="module" src="/js/pages/battle.js"></script>
