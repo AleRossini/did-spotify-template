@@ -3,13 +3,12 @@ import {getHashParams} from "../helpers/url.js";
 import {STATE_KEY} from "../helpers/constants.js";
 
 const USER_PROFILE = document.getElementById('user-profile');
-const SONGS = document.getElementById('songs');
-const ARTISTS = document.getElementById('artists');
 const {access_token, state} = getHashParams();
 const storedState = localStorage.getItem(STATE_KEY);
 
 
-const outputTemplate = ({display_name, id, email, uri, external_urls, images, country}) =>`<h1>Hey <b>${display_name}</b>, <br/> do you know who's the best ...??</h1>
+const outputTemplate = ({display_name, id, email, uri, external_urls, images, country}) =>
+`<h1>Hey <b>${display_name}</b>, do you know who's the best ...??</h1>
   <!--div class="media">
     <div class="pull-left">
       <img class="media-object" width="150" src="">
@@ -47,12 +46,50 @@ if (!access_token || (state == null || state !== storedState)) {
  //
  //   console.log(value);
  // }
-async function getSongsForArtist() {
-  var artistsName = document.getElementById('typedArtistName').value.toLowerCase();
-  var artist = await SpotifyAPI.getArtists(access_token, artistsName);
-  var songs = await SpotifyAPI.getSongs(access_token, artist.id);
-  // var checkedSong = 'valore iniziale';
 
+
+ async function checkPopularity() {
+
+   // get first artist
+   var firstArtistsName = document.getElementById('firstArtistName').value.toLowerCase();
+
+   // get second artist
+   var secondArtistsName = document.getElementById('secondArtistName').value.toLowerCase();
+
+   if (firstArtistsName) {
+     var firstArtist = await SpotifyAPI.getArtists(access_token, firstArtistsName);
+     var firstArtistImg = document.getElementById('firstArtistImg');
+     firstArtistImg.src = firstArtist.images[0].url;
+     var firstArtistPopularity = firstArtist.popularity;
+   }
+
+   if (secondArtistsName) {
+     var secondArtist = await SpotifyAPI.getArtists(access_token, secondArtistsName);
+     var secondArtistImg = document.getElementById('secondArtistImg');
+     secondArtistImg.src = secondArtist.images[0].url;
+     var secondArtistPopularity = secondArtist.popularity;
+   }
+
+   console.log(firstArtistsName);
+   if (firstArtistsName > secondArtistsName) {
+     secondArtistImg.style.opacity = "0.3";
+   }
+   if (secondArtistsName > firstArtistsName) {
+     firstArtistImg.style.opacity = "0.3";
+   }
+
+ }
+
+
+ // document.getElementById('sendArtistName1').addEventListener('onkeyup', getArtistInfo);
+ // document.getElementById('sendArtistName2').addEventListener('click', getArtistInfo);
+ document.getElementById('main-btn').addEventListener('click', checkPopularity);
+
+
+//  *---- EVERYTHING FROM HERE IS A TEST TO ADD FEATURES ----* //
+
+async function getSongsForArtist() {
+    // var songs = await SpotifyAPI.getSongs(access_token, firstArtist.id);
     songs.tracks.forEach((song) => {
       var list = document.createElement('li');
       list.appendChild(document.createTextNode(song.name));
@@ -65,7 +102,7 @@ async function getSongsForArtist() {
         //   input.checked ? (checkedSong = input.value) : null;
         //   console.log(checkedSong);
         // })
-      document.getElementById('artistTopTracks').appendChild(list).appendChild(input);
+      document.getElementById('firstArtistTopTracks').appendChild(list).appendChild(input);
     })
     // prova();
     // console.log(checkedSong);
@@ -86,9 +123,9 @@ async function getSongsForArtist() {
       var checkedSong = songsList.find(button => button.checked === true);
     // })
 
-    console.log(radioButtons);
-    console.log(songsList);
-    console.log(checkedSong);
+    // console.log(radioButtons);
+    // console.log(songsList);
+    // console.log(checkedSong);
 
 
     // Create a static list
@@ -115,5 +152,3 @@ async function getSongsForArtist() {
     // }
 
 }
-
-document.getElementById('sendArtistName').addEventListener('click', getSongsForArtist);

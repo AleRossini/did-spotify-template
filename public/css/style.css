@@ -1,40 +1,102 @@
+body {
+  background: #19a2d4;
+  color: #383838;
+  font-family: "Arial", sans-serif;
+}
+
 h1 {
-  text-align: center;
+  font-size: 35px;
+  font-weight: 400;
 }
 
-.container { 
-  height: 100%;
-  width: 100%;
-  left:0;
-  right: 0;
-  top: 0;
-  bottom: 0;
-  position: absolute;
-background: linear-gradient(124deg, #ff2400, #e81d1d, #e8b71d, #e3e81d, #1de840, #1ddde8, #2b1de8, #dd00f3, #dd00f3);
-background-size: 1800% 1800%;
+button {
+  cursor: pointer;
+  background-color: white;
+  border: none;
+  border-radius: 5px;
+}
 
--webkit-animation: rainbow 18s ease infinite;
--z-animation: rainbow 18s ease infinite;
--o-animation: rainbow 18s ease infinite;
-  animation: rainbow 18s ease infinite;}
+/* responsive structure */
+.flex {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+}
+.wrap {
+  flex-wrap: wrap;
+}
+.nowrap {
+  flex-wrap: nowrap;
+}
+.flex_column {
+  flex-direction: column;
+}
+.flex_row {
+  flex-direction: row;
+}
+.justify_center {
+  justify-content: center;
+}
+.justify_around {
+  justify-content: space-around;
+}
+.align_center {
+  align-items: center;
+}
+.wrapper {
+  margin: auto;
+  height: inherit;
+  max-width: 960px;
+}
 
-@-webkit-keyframes rainbow {
-    0%{background-position:0% 82%}
-    50%{background-position:100% 19%}
-    100%{background-position:0% 82%}
+/*  */
+
+figure {
+  border-radius: 50%;
+  height: 200px;
+  width: 200px;
+  background-color: #e0e0e0;
 }
-@-moz-keyframes rainbow {
-    0%{background-position:0% 82%}
-    50%{background-position:100% 19%}
-    100%{background-position:0% 82%}
+
+figure img {
+  max-height: 100%;
+  clip-path: circle(100px at center);
 }
-@-o-keyframes rainbow {
-    0%{background-position:0% 82%}
-    50%{background-position:100% 19%}
-    100%{background-position:0% 82%}
-}
-@keyframes rainbow {
-    0%{background-position:0% 82%}
-    50%{background-position:100% 19%}
-    100%{background-position:0% 82%}
-}
+
+#main-btn {
+    padding: 12px 20px;
+    font-size: 20px;
+    color: inherit;
+    -webkit-box-shadow: 0px 7px 26px -2px rgba(56,56,56,0.58);
+    -moz-box-shadow: 0px 7px 26px -2px rgba(56,56,56,0.58);
+    box-shadow: 0px 7px 26px -2px rgba(56,56,56,0.58);
+    background: linear-gradient(124deg, #ff2400, #e81d1d, #e8b71d, #e3e81d, #1de840, #1ddde8, #2b1de8, #dd00f3, #dd00f3);
+    background-size: 1800% 1800%;
+
+    -webkit-animation: rainbow 18s ease infinite;
+    -z-animation: rainbow 18s ease infinite;
+    -o-animation: rainbow 18s ease infinite;
+      animation: rainbow 18s ease infinite;}
+
+    @-webkit-keyframes rainbow {
+        0%{background-position:0% 82%}
+        50%{background-position:100% 19%}
+        100%{background-position:0% 82%}
+    }
+    @-moz-keyframes rainbow {
+        0%{background-position:0% 82%}
+        50%{background-position:100% 19%}
+        100%{background-position:0% 82%}
+    }
+    @-o-keyframes rainbow {
+        0%{background-position:0% 82%}
+        50%{background-position:100% 19%}
+        100%{background-position:0% 82%}
+    }
+    @keyframes rainbow {
+        0%{background-position:0% 82%}
+        50%{background-position:100% 19%}
+        100%{background-position:0% 82%}
+      }
