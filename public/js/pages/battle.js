@@ -6,9 +6,14 @@ const USER_PROFILE = document.getElementById('user-profile');
 const {access_token, state} = getHashParams();
 const storedState = localStorage.getItem(STATE_KEY);
 
+//                                                                //
+//  NOTES: I am well aware this code is full of repetitions.      //
+//         Still trying to shrink and squeeze everything.         //
+//                                                                //
 
 const outputTemplate = ({display_name, id, email, uri, external_urls, images, country}) =>
-`<h1>Hey <b>${display_name}</b>, do you know who's the best ...??</h1>
+` <h2>Hey <b>${display_name}</b></h2>
+  <h1>Can you guess who is the most popular?</h1>
   <!--div class="media">
     <div class="pull-left">
       <img class="media-object" width="150" src="">
@@ -38,117 +43,152 @@ if (!access_token || (state == null || state !== storedState)) {
   // });
 }
 
+//
+// GET FEW ELEMENTS FROM HTML PAGE AND SET TIMEOUT
+//
+var firstTypedArtist = document.getElementById('firstTypedArtist');
+var firstArtistImg = document.getElementById('firstArtistFigure');
+var firstArtistName = document.getElementById('firstArtistName');
+var secondTypedArtist = document.getElementById('secondTypedArtist');
+var secondArtistImg = document.getElementById('secondArtistFigure');
+var secondArtistName = document.getElementById('secondArtistName');
+var timeout = null;
 
- //ARTISTS.innerHTML = artistsList.map((a)=> return a.name).join(',');
- // console.log(artistsList);
- //
- // function sendArtistName(value) {
- //
- //   console.log(value);
- // }
+//
+// GET FIRST ARTIST NAME AFTER TYPING THEN SHOW NAME AND IMAGE
+//
+firstTypedArtist.onkeyup = function () {
+  clearTimeout(timeout);
+  timeout = setTimeout(function (e) {
+       var firstName = firstTypedArtist.value.toLowerCase();
+       if (firstName) {
+         var firstArtist = SpotifyAPI.getArtists(access_token, firstName).then(function (result) {
+           firstArtistName.innerHTML = result.name;
+           firstArtistImg.style.backgroundImage = "url('" + result.images[0].url + "')";
+         })}
+         else {
+           firstArtistName.innerHTML = "";
+            firstArtistImg.style.backgroundImage = "none";
+            firstArtistImg.style.opacity = "1";
+         };
+   }, 500);
+}
 
+//
+// GET SECOND ARTIST NAME AFTER TYPING THEN SHOW NAME AND IMAGE
+//
+secondTypedArtist.onkeyup = function () {
+  clearTimeout(timeout);
+  timeout = setTimeout(function (e) {
+       var secondName = secondTypedArtist.value.toLowerCase();
+       if (secondName) {
+         var secondArtist = SpotifyAPI.getArtists(access_token, secondName).then(function (result) {
+         secondArtistName.innerHTML = result.name;
+         secondArtistImg.style.backgroundImage = "url('" + result.images[0].url + "')";
+         })}
+         else {
+           secondArtistName.innerHTML = "";
+           secondArtistImg.style.backgroundImage = "none";
+           secondArtistImg.style.opacity = "1";
+         };
+   }, 300);
+}
 
+//
+// FUNCTION FOR COMPARING THE TWO ARTISTS POPULARITY SCORE
+//
  async function checkPopularity() {
 
-   // get first artist
-   var firstArtistsName = document.getElementById('firstArtistName').value.toLowerCase();
+   // again - get first artist name
+   var firstName = firstTypedArtist.value.toLowerCase();
+   // again - get second artist name
+   var secondName = secondTypedArtist.value.toLowerCase();
 
-   // get second artist
-   var secondArtistsName = document.getElementById('secondArtistName').value.toLowerCase();
-
-   if (firstArtistsName) {
-     var firstArtist = await SpotifyAPI.getArtists(access_token, firstArtistsName);
-     var firstArtistImg = document.getElementById('firstArtistImg');
-     firstArtistImg.src = firstArtist.images[0].url;
+   // get values only if something is typed
+   if (firstName) {
+     var firstArtist = await SpotifyAPI.getArtists(access_token, firstName);
      var firstArtistPopularity = firstArtist.popularity;
    }
-
-   if (secondArtistsName) {
-     var secondArtist = await SpotifyAPI.getArtists(access_token, secondArtistsName);
-     var secondArtistImg = document.getElementById('secondArtistImg');
-     secondArtistImg.src = secondArtist.images[0].url;
+   // get values only if something is typed
+   if (secondName) {
+     var secondArtist = await SpotifyAPI.getArtists(access_token, secondName);
      var secondArtistPopularity = secondArtist.popularity;
    }
 
-   console.log(firstArtistsName);
-   if (firstArtistsName > secondArtistsName) {
+   // compare the popularity and modify page style
+   if (firstArtistPopularity > secondArtistPopularity) {
      secondArtistImg.style.opacity = "0.3";
+   } else {
+     secondArtistImg.style.opacity = "1";
    }
-   if (secondArtistsName > firstArtistsName) {
+   if (secondArtistPopularity > firstArtistPopularity) {
      firstArtistImg.style.opacity = "0.3";
+   } else {
+     firstArtistImg.style.opacity = "1";
    }
-
  }
 
-
- // document.getElementById('sendArtistName1').addEventListener('onkeyup', getArtistInfo);
- // document.getElementById('sendArtistName2').addEventListener('click', getArtistInfo);
+ //
+ // CALLING THE POPULARITY FUNCTION WHEN PRESS THE MAIN BUTTON
+ //
  document.getElementById('main-btn').addEventListener('click', checkPopularity);
 
 
 //  *---- EVERYTHING FROM HERE IS A TEST TO ADD FEATURES ----* //
 
-async function getSongsForArtist() {
-    // var songs = await SpotifyAPI.getSongs(access_token, firstArtist.id);
-    songs.tracks.forEach((song) => {
-      var list = document.createElement('li');
-      list.appendChild(document.createTextNode(song.name));
-      var input = document.createElement('input');
-      input.class = 'song';
-      input.type = "radio";
-      input.name = "song";
-      input.value = song.id;
-        // input.addEventListener('change', function prova() {
-        //   input.checked ? (checkedSong = input.value) : null;
-        //   console.log(checkedSong);
-        // })
-      document.getElementById('firstArtistTopTracks').appendChild(list).appendChild(input);
-    })
-    // prova();
-    // console.log(checkedSong);
-
-
-    // Trying to solve with FILTER
-    // const radioButtons = document.getElementsByName("song");
-    // const button = radioButtons.filter(function(button) {
-    // return button.checked;
-    // })[0]
-
-    // Trying to solve with FIND
-    var radioButtons = document.getElementsByName("song");
-    // radioButtons.addEventListener('change', (button) => { console.log(button.value)});
-    // console.log(radioButtons);
-    // radioButtons.addEventListener('change', () => {
-      const songsList = Array.from(radioButtons);
-      var checkedSong = songsList.find(button => button.checked === true);
-    // })
-
-    // console.log(radioButtons);
-    // console.log(songsList);
-    // console.log(checkedSong);
-
-
-    // Create a static list
-    // var songsList = document.querySelectorAll( 'input[name=song]');
-
-    //  Create a live/dynamic list
-    // var radioButtons = document.getElementsByName("song");
-
-    // Using click() to watch on radio button
-    // var checked = songsList.click();
-
-    //  Can't remember what this does
-    // var checked = Array.prototype.forEach.call(songsList, function (item) {
-    //   item.checked = true;
-    // });
-
-    // Next step -> Take info of the SELECTED/CHECKED track
-    // if ( button.checked === true) {
-    //   var trackInfo = await SpotifyAPI.getTrackDetails(access_token, button.id, songs.tracks[0].id);
-    //   console.log(trackInfo);
-    // }
-    // else {
-    //
-    // }
-
-}
+//
+// FUNCTION FOR GETTING THE ARTISTS SONGS
+//
+// async function getSongsForArtist() {
+//     // var songs = await SpotifyAPI.getSongs(access_token, firstArtist.id);
+//     songs.tracks.forEach((song) => {
+//       var list = document.createElement('li');
+//       list.appendChild(document.createTextNode(song.name));
+//       var input = document.createElement('input');
+//       input.class = 'song';
+//       input.type = "radio";
+//       input.name = "song";
+//       input.value = song.id;
+//         // input.addEventListener('change', function prova() {
+//         //   input.checked ? (checkedSong = input.value) : null;
+//         // })
+//       document.getElementById('firstArtistTopTracks').appendChild(list).appendChild(input);
+//     })
+//
+//     //TRYING TO SOLVE WITH FILTER
+//     // const radioButtons = document.getElementsByName("song");
+//     // const button = radioButtons.filter(function(button) {
+//     // return button.checked;
+//     // })[0]
+//
+//     // TRYING TO SOLVE WITH FIND
+//     var radioButtons = document.getElementsByName("song");
+//     // radioButtons.addEventListener('change', (button) => { console.log(button.value)});
+//     // console.log(radioButtons);
+//     // radioButtons.addEventListener('change', () => {
+//       const songsList = Array.from(radioButtons);
+//       var checkedSong = songsList.find(button => button.checked === true);
+//     // })
+//
+//     // CREATING A STATIC LIST
+//     // var songsList = document.querySelectorAll( 'input[name=song]');
+//
+//     //  CREATING A LIVE/DYNAMIC LIST
+//     // var radioButtons = document.getElementsByName("song");
+//
+//     // Using click() to watch on radio button
+//     // var checked = songsList.click();
+//
+//     //  Can't remember what this does
+//     // var checked = Array.prototype.forEach.call(songsList, function (item) {
+//     //   item.checked = true;
+//     // });
+//
+//     // Next step -> Take info of the SELECTED/CHECKED track
+//     // if ( button.checked === true) {
+//     //   var trackInfo = await SpotifyAPI.getTrackDetails(access_token, button.id, songs.tracks[0].id);
+//     // }
+//     // else {
+//     //
+//     // }
+// }
