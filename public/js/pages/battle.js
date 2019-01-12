@@ -12,8 +12,7 @@ const storedState = localStorage.getItem(STATE_KEY);
 //                                                                //
 
 const outputTemplate = ({display_name, id, email, uri, external_urls, images, country}) =>
-` <h2>Hey <b>${display_name}</b></h2>
-  <h1>Can you guess who is the most popular?</h1>
+` <h2><img class="logo_sm" src="../img/logo_thin.png"> Hey <b>${display_name}</b>, welcome! </h2>
   <!--div class="media">
     <div class="pull-left">
       <img class="media-object" width="150" src="">
@@ -70,6 +69,7 @@ firstTypedArtist.onkeyup = function () {
            firstArtistName.innerHTML = "";
             firstArtistImg.style.backgroundImage = "none";
             firstArtistImg.style.opacity = "1";
+            firstArtistName.classList.remove("rainbow");
          };
    }, 500);
 }
@@ -90,6 +90,7 @@ secondTypedArtist.onkeyup = function () {
            secondArtistName.innerHTML = "";
            secondArtistImg.style.backgroundImage = "none";
            secondArtistImg.style.opacity = "1";
+           secondArtistName.classList.remove("rainbow");
          };
    }, 300);
 }
@@ -118,20 +119,25 @@ secondTypedArtist.onkeyup = function () {
    // compare the popularity and modify page style
    if (firstArtistPopularity > secondArtistPopularity) {
      secondArtistImg.style.opacity = "0.3";
+     firstArtistName.classList.add("rainbow");
    } else {
      secondArtistImg.style.opacity = "1";
+     firstArtistName.classList.remove("rainbow");
    }
    if (secondArtistPopularity > firstArtistPopularity) {
      firstArtistImg.style.opacity = "0.3";
+     secondArtistName.classList.add("rainbow");
    } else {
      firstArtistImg.style.opacity = "1";
+     secondArtistName.classList.remove("rainbow");
    }
  }
 
  //
  // CALLING THE POPULARITY FUNCTION WHEN PRESS THE MAIN BUTTON
  //
- document.getElementById('main-btn').addEventListener('click', checkPopularity);
+firstArtistName.addEventListener('click', checkPopularity);
+secondArtistName.addEventListener('click', checkPopularity);
 
 
 //  *---- EVERYTHING FROM HERE IS A TEST TO ADD FEATURES ----* //

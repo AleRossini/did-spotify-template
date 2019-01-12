@@ -9,36 +9,37 @@
   <body>
     <section>
       <div class="wrapper flex wrap flex_column">
-        <div class="flex">
+        <div class="flex flex_column">
           <div id="user-profile"></div>
+          <h1>Can you guess who is the most popular artist?</h1>
         </div>
-        <div id ="battleField" class="flex wrap flex_row justify_around">
-          <div class="flex flex_column align_center">
-            <input id="firstTypedArtist" type="text" value="">
+        <div class="flex wrap flex_row justify_around added_margin_top">
+          <div class="flex flex_column align_center added_margin_bottom">
+            <input id="firstTypedArtist" type="text" placeholder="Type artist name here">
             <figure id="firstArtistFigure">
               <!-- <img id="firstArtistImg" src=""> -->
             </figure>
-            <h3 id="firstArtistName" class="self_center"></h3>
+            <h3 id="firstArtistName"></h3>
             <!-- <button id="sendArtistName1">Get Tracks</button> -->
             <!-- <form>
               <ul id="artistTopTracks"></ul>
             </form> -->
           </div>
-          <div class="flex flex_column align_center">
-            <input id="secondTypedArtist" type="text" value="">
+          <div class="flex flex_column align_center added_margin_bottom">
+            <input id="secondTypedArtist" type="text" placeholder="Type artist name here">
             <figure id="secondArtistFigure">
               <!-- <img id="secondArtistImg" src=""> -->
             </figure>
-            <h3 id="secondArtistName" class="self_center"></h3>
+            <h3 id="secondArtistName"></h3>
             <!-- <button id="sendArtistName2">Get Tracks</button> -->
             <!-- <form>
               <ul id="firstArtistTopTracks"></ul>
             </form> -->
           </div>
         </div>
-        <div class="flex justify_center">
-          <button id="main-btn">FIGHT!</button>
-        </div>
+        <!-- <div class="flex justify_center">
+          <button id="main-btn">SEE THE WINNER</button>
+        </div> -->
       </div>
     </section>
     <script type="module" src="/js/pages/battle.js"></script>

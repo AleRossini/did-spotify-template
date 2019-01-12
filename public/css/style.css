@@ -1,14 +1,20 @@
 body {
-  background: #19a2d4;
+  background: #23baf0;
   color: #383838;
   font-family: "Arial", sans-serif;
 }
-h1, h2, h3 {
+h2, h3 {
   font-weight: 400;
+  border-radius: 5px;
 }
 h1 {
-  font-size: 35px;
-  margin:0;
+  font-size: 37px;
+  margin: auto;
+  text-transform: uppercase;
+  padding: 30px 45px;
+  border: 2px solid;
+  width: 70%;
+  border-radius: 5px;
 }
 
 h2 {
@@ -19,6 +25,14 @@ h3 {
   font-size: 40px;
   margin: 0;
   height: 80px;
+  border: 1px solid;
+  width: 100%;
+  line-height: 80px;
+  text-align: center;
+  cursor: pointer
+}
+h3:hover {
+  background-color: #e0e0e0;
 }
 
 button {
@@ -26,13 +40,20 @@ button {
   background-color: white;
   border: none;
   border-radius: 5px;
+  -webkit-transition-duration: 0.4s;
+  transition-duration: 0.4s;
+  padding: 12px 20px;
+  font-size: 20px;
+  -webkit-box-shadow: 0px 7px 26px -2px rgba(56,56,56,0.58);
+  -moz-box-shadow: 0px 7px 26px -2px rgba(56,56,56,0.58);
+  box-shadow: 0px 7px 26px -2px rgba(56,56,56,0.58);
 }
 
 input {
   background: transparent;
   border: none;
   border-bottom: 1px solid #383838;
-  font-size: 30px;
+  font-size: 22px;
   text-align: center;
   color: #383838;
 }
@@ -43,7 +64,6 @@ figure {
   width: 200px;
   background-color: #e0e0e0;
   background-size: cover;
-  margin-top: 30px;
 }
 
 /* responsive structure */
@@ -86,23 +106,28 @@ figure {
 
 /* ids and class */
 
-#battleField {
-  margin-top: 55px;
+.logo_sm {
+  max-width: 10%;
+  max-height: auto;
 }
-#main-btn {
-    padding: 12px 20px;
-    font-size: 20px;
-    color: inherit;
-    -webkit-box-shadow: 0px 7px 26px -2px rgba(56,56,56,0.58);
-    -moz-box-shadow: 0px 7px 26px -2px rgba(56,56,56,0.58);
-    box-shadow: 0px 7px 26px -2px rgba(56,56,56,0.58);
+.added_margin_bottom {
+  margin-bottom: 40px;
+}
+.added_margin_top {
+  margin-top: 45px;
+}
+button:hover, .rainbow {
+    color: #e2e2e2;
     background: linear-gradient(124deg, #ff2400, #e81d1d, #e8b71d, #e3e81d, #1de840, #1ddde8, #2b1de8, #dd00f3, #dd00f3);
     background-size: 1800% 1800%;
-
     -webkit-animation: rainbow 18s ease infinite;
     -z-animation: rainbow 18s ease infinite;
     -o-animation: rainbow 18s ease infinite;
-      animation: rainbow 18s ease infinite;}
+    animation: rainbow 18s ease infinite;
+    -webkit-box-shadow: 0px 7px 26px -2px rgba(56,56,56,0.58);
+    -moz-box-shadow: 0px 7px 26px -2px rgba(56,56,56,0.58);
+    box-shadow: 0px 7px 26px -2px rgba(56,56,56,0.58);
+    }
 
     @-webkit-keyframes rainbow {
         0%{background-position:0% 82%}

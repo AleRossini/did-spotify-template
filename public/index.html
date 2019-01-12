@@ -2,14 +2,19 @@
 <html>
   <head>
     <title>Spotify Artist Battle Template</title>
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+    <!-- <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css"> -->
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="../css/style.css">
   </head>
 
   <body>
-    <div class="container">
-      <div id="login">
-        <h1>This is an example of the Implicit Grant flow</h1>
-        <button id="login-button" class="btn btn-primary">Log in with Spotify</button>
+    <div class="wrapper">
+      <div id="login" class="flex flex_column">
+        <div class="flex self_center added_margin_bottom added_margin_top">
+          <img src="../img/logo_thin.png" alt="Music-battle-game logo">
+        </div>
+        <h1>Welcome to music battle game!<br /></h1>
+        <button id="login-button" class="added_margin_top self_center">Log in to play</button>
       </div>
     </div>
     <script type="module" src="/js/pages/main.js"></script>
