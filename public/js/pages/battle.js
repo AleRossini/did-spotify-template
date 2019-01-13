@@ -63,6 +63,7 @@ firstTypedArtist.onkeyup = function () {
        if (firstName) {
          var firstArtist = SpotifyAPI.getArtists(access_token, firstName).then(function (result) {
            firstArtistName.innerHTML = result.name;
+           firstArtistName.style.border = "1px solid";
            firstArtistImg.style.backgroundImage = "url('" + result.images[0].url + "')";
          })}
          else {
@@ -70,6 +71,7 @@ firstTypedArtist.onkeyup = function () {
             firstArtistImg.style.backgroundImage = "none";
             firstArtistImg.style.opacity = "1";
             firstArtistName.classList.remove("rainbow");
+            firstArtistName.style.border = "none";
          };
    }, 500);
 }
@@ -84,10 +86,12 @@ secondTypedArtist.onkeyup = function () {
        if (secondName) {
          var secondArtist = SpotifyAPI.getArtists(access_token, secondName).then(function (result) {
          secondArtistName.innerHTML = result.name;
+         secondArtistName.style.border = "1px solid";
          secondArtistImg.style.backgroundImage = "url('" + result.images[0].url + "')";
          })}
          else {
            secondArtistName.innerHTML = "";
+           secondArtistName.style.border = "none";
            secondArtistImg.style.backgroundImage = "none";
            secondArtistImg.style.opacity = "1";
            secondArtistName.classList.remove("rainbow");
