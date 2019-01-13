@@ -12,23 +12,11 @@ const storedState = localStorage.getItem(STATE_KEY);
 //                                                                //
 
 const outputTemplate = ({display_name, id, email, uri, external_urls, images, country}) =>
-` <h2><img class="logo_sm" src="../img/logo_thin.png"> Hey <b>${display_name}</b>, welcome! </h2>
-  <!--div class="media">
-    <div class="pull-left">
-      <img class="media-object" width="150" src="">
-    </div>
-    <div class="media-body">
-      <dl class="dl-horizontal">
-        <dt>Display name</dt><dd class="clearfix"></dd>
-        <dt>Id</dt><dd>${id}</dd>
-        <dt>Email</dt><dd>${email}</dd>
-        <dt>Spotify URI</dt><dd><a href="${uri}">${uri}</a></dd>
-        <dt>Link</dt><dd><a href="${external_urls.spotify}">${external_urls.spotify}</a></dd>
-        <dt>Profile Image</dt><dd class="clearfix"><a href=""></a></dd>
-        <dt>Country</dt><dd>${country}</dd>
-      </dl>
-    </div>
-  </div-->`
+` <h2>
+    <img class="logo_sm" src="../img/logo_thin.png">
+    Hey <b>${display_name}</b>, welcome!
+  </h2>
+  `
 
 
 if (!access_token || (state == null || state !== storedState)) {
@@ -37,9 +25,6 @@ if (!access_token || (state == null || state !== storedState)) {
   SpotifyAPI.getUserData(access_token).then(data => {
     USER_PROFILE.innerHTML = outputTemplate(data);
   });
-  // SpotifyAPI.getSongs(access_token).then(data => {
-  //   SONGS.innerHTML = outputTemplate(data);
-  // });
 }
 
 //
@@ -51,6 +36,8 @@ var firstArtistName = document.getElementById('firstArtistName');
 var secondTypedArtist = document.getElementById('secondTypedArtist');
 var secondArtistImg = document.getElementById('secondArtistFigure');
 var secondArtistName = document.getElementById('secondArtistName');
+var firstArtistScore = document.getElementById('firstArtistScore');
+var secondArtistScore = document.getElementById('secondArtistScore');
 var timeout = null;
 
 //
@@ -73,7 +60,7 @@ firstTypedArtist.onkeyup = function () {
             firstArtistName.classList.remove("rainbow");
             firstArtistName.style.border = "none";
          };
-   }, 500);
+   }, 300);
 }
 
 //
@@ -104,9 +91,9 @@ secondTypedArtist.onkeyup = function () {
 //
  async function checkPopularity() {
 
-   // again - get first artist name
+   // get first artist name
    var firstName = firstTypedArtist.value.toLowerCase();
-   // again - get second artist name
+   // get second artist name
    var secondName = secondTypedArtist.value.toLowerCase();
 
    // get values only if something is typed
@@ -124,6 +111,8 @@ secondTypedArtist.onkeyup = function () {
    if (firstArtistPopularity > secondArtistPopularity) {
      secondArtistImg.style.opacity = "0.3";
      firstArtistName.classList.add("rainbow");
+     firstArtistScore.innerHTML = "Between 1 and 100, the artist's popularity is <b>" + firstArtistPopularity + "</b>"
+     secondArtistScore.innerHTML = "The loser popularity is <b>" + secondArtistPopularity + "</b>"
    } else {
      secondArtistImg.style.opacity = "1";
      firstArtistName.classList.remove("rainbow");
@@ -131,6 +120,8 @@ secondTypedArtist.onkeyup = function () {
    if (secondArtistPopularity > firstArtistPopularity) {
      firstArtistImg.style.opacity = "0.3";
      secondArtistName.classList.add("rainbow");
+     secondArtistScore.innerHTML = "Between 1 and 100, the artist's popularity is <b>" + secondArtistPopularity + "</b>"
+     firstArtistScore.innerHTML = "The loser popularity is <b>" + firstArtistPopularity + "</b>"
    } else {
      firstArtistImg.style.opacity = "1";
      secondArtistName.classList.remove("rainbow");
@@ -142,63 +133,3 @@ secondTypedArtist.onkeyup = function () {
  //
 firstArtistName.addEventListener('click', checkPopularity);
 secondArtistName.addEventListener('click', checkPopularity);
-
-
-//  *---- EVERYTHING FROM HERE IS A TEST TO ADD FEATURES ----* //
-
-//
-// FUNCTION FOR GETTING THE ARTISTS SONGS
-//
-// async function getSongsForArtist() {
-//     // var songs = await SpotifyAPI.getSongs(access_token, firstArtist.id);
-//     songs.tracks.forEach((song) => {
-//       var list = document.createElement('li');
-//       list.appendChild(document.createTextNode(song.name));
-//       var input = document.createElement('input');
-//       input.class = 'song';
-//       input.type = "radio";
-//       input.name = "song";
-//       input.value = song.id;
-//         // input.addEventListener('change', function prova() {
-//         //   input.checked ? (checkedSong = input.value) : null;
-//         // })
-//       document.getElementById('firstArtistTopTracks').appendChild(list).appendChild(input);
-//     })
-//
-//     //TRYING TO SOLVE WITH FILTER
-//     // const radioButtons = document.getElementsByName("song");
-//     // const button = radioButtons.filter(function(button) {
-//     // return button.checked;
-//     // })[0]
-//
-//     // TRYING TO SOLVE WITH FIND
-//     var radioButtons = document.getElementsByName("song");
-//     // radioButtons.addEventListener('change', (button) => { console.log(button.value)});
-//     // console.log(radioButtons);
-//     // radioButtons.addEventListener('change', () => {
-//       const songsList = Array.from(radioButtons);
-//       var checkedSong = songsList.find(button => button.checked === true);
-//     // })
-//
-//     // CREATING A STATIC LIST
-//     // var songsList = document.querySelectorAll( 'input[name=song]');
-//
-//     //  CREATING A LIVE/DYNAMIC LIST
-//     // var radioButtons = document.getElementsByName("song");
-//
-//     // Using click() to watch on radio button
-//     // var checked = songsList.click();
-//
-//     //  Can't remember what this does
-//     // var checked = Array.prototype.forEach.call(songsList, function (item) {
-//     //   item.checked = true;
-//     // });
-//
-//     // Next step -> Take info of the SELECTED/CHECKED track
-//     // if ( button.checked === true) {
-//     //   var trackInfo = await SpotifyAPI.getTrackDetails(access_token, button.id, songs.tracks[0].id);
-//     // }
-//     // else {
-//     //
-//     // }
-// }

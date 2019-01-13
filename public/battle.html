@@ -2,7 +2,6 @@
 <html>
   <head>
     <title>Spotify Artist Battle Template</title>
-    <!-- <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css"> -->
     <!-- Custom CSS -->
     <link rel="stylesheet" href="../css/style.css">
   </head>
@@ -11,35 +10,22 @@
       <div class="wrapper flex wrap flex_column">
         <div class="flex flex_column">
           <div id="user-profile"></div>
-          <h1>Can you guess who is the most popular artist?</h1>
+          <h1 class="flex self_center">Can you guess who is the most popular artist?</h1>
         </div>
         <div class="flex wrap flex_row justify_around added_margin_top">
           <div class="flex flex_column align_center added_margin_bottom">
             <input id="firstTypedArtist" type="text" placeholder="Type artist name here">
-            <figure id="firstArtistFigure">
-              <!-- <img id="firstArtistImg" src=""> -->
-            </figure>
+            <figure id="firstArtistFigure"></figure>
             <h3 id="firstArtistName"></h3>
-            <!-- <button id="sendArtistName1">Get Tracks</button> -->
-            <!-- <form>
-              <ul id="artistTopTracks"></ul>
-            </form> -->
+            <p id="firstArtistScore"></p>
           </div>
           <div class="flex flex_column align_center added_margin_bottom">
             <input id="secondTypedArtist" type="text" placeholder="Type artist name here">
-            <figure id="secondArtistFigure">
-              <!-- <img id="secondArtistImg" src=""> -->
-            </figure>
+            <figure id="secondArtistFigure"></figure>
             <h3 id="secondArtistName"></h3>
-            <!-- <button id="sendArtistName2">Get Tracks</button> -->
-            <!-- <form>
-              <ul id="firstArtistTopTracks"></ul>
-            </form> -->
+            <p id="secondArtistScore"></p>
           </div>
         </div>
-        <!-- <div class="flex justify_center">
-          <button id="main-btn">SEE THE WINNER</button>
-        </div> -->
       </div>
     </section>
     <script type="module" src="/js/pages/battle.js"></script>
