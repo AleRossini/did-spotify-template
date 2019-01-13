@@ -11,9 +11,10 @@ const storedState = localStorage.getItem(STATE_KEY);
 //         Still trying to shrink and squeeze everything.         //
 //                                                                //
 
-const outputTemplate = ({display_name, id, email, uri, external_urls, images, country}) =>
-` <h2>
+const outputTemplate = ({display_name}) =>
+`
     <img class="logo_sm" src="../img/logo_thin.png">
+  <h2 class="self_end added_margin_side">
     Hey <b>${display_name}</b>, welcome!
   </h2>
   `
@@ -45,7 +46,7 @@ var timeout = null;
 //
 firstTypedArtist.onkeyup = function () {
   clearTimeout(timeout);
-  timeout = setTimeout(function (e) {
+  timeout = setTimeout(function () {
        var firstName = firstTypedArtist.value.toLowerCase();
        if (firstName) {
          var firstArtist = SpotifyAPI.getArtists(access_token, firstName).then(function (result) {
@@ -59,6 +60,8 @@ firstTypedArtist.onkeyup = function () {
             firstArtistImg.style.opacity = "1";
             firstArtistName.classList.remove("rainbow");
             firstArtistName.style.border = "none";
+            firstArtistScore.innerHTML = "";
+            secondArtistScore.innerHTML = "";
          };
    }, 300);
 }
@@ -68,7 +71,7 @@ firstTypedArtist.onkeyup = function () {
 //
 secondTypedArtist.onkeyup = function () {
   clearTimeout(timeout);
-  timeout = setTimeout(function (e) {
+  timeout = setTimeout(function () {
        var secondName = secondTypedArtist.value.toLowerCase();
        if (secondName) {
          var secondArtist = SpotifyAPI.getArtists(access_token, secondName).then(function (result) {
@@ -82,6 +85,8 @@ secondTypedArtist.onkeyup = function () {
            secondArtistImg.style.backgroundImage = "none";
            secondArtistImg.style.opacity = "1";
            secondArtistName.classList.remove("rainbow");
+           firstArtistScore.innerHTML = "";
+           secondArtistScore.innerHTML = "";
          };
    }, 300);
 }
@@ -111,20 +116,28 @@ secondTypedArtist.onkeyup = function () {
    if (firstArtistPopularity > secondArtistPopularity) {
      secondArtistImg.style.opacity = "0.3";
      firstArtistName.classList.add("rainbow");
-     firstArtistScore.innerHTML = "Between 1 and 100, the artist's popularity is <b>" + firstArtistPopularity + "</b>"
+     firstArtistScore.innerHTML = "In a scale of 1 to 100, the artist's popularity is <b>" + firstArtistPopularity + "</b>"
      secondArtistScore.innerHTML = "The loser popularity is <b>" + secondArtistPopularity + "</b>"
    } else {
      secondArtistImg.style.opacity = "1";
      firstArtistName.classList.remove("rainbow");
+     secondArtistScore.innerHTML = ""
+     firstArtistScore.innerHTML = ""
    }
    if (secondArtistPopularity > firstArtistPopularity) {
      firstArtistImg.style.opacity = "0.3";
      secondArtistName.classList.add("rainbow");
-     secondArtistScore.innerHTML = "Between 1 and 100, the artist's popularity is <b>" + secondArtistPopularity + "</b>"
+     secondArtistScore.innerHTML = "In a scale of 1 to 100, the artist's popularity is <b>" + secondArtistPopularity + "</b>"
      firstArtistScore.innerHTML = "The loser popularity is <b>" + firstArtistPopularity + "</b>"
    } else {
      firstArtistImg.style.opacity = "1";
      secondArtistName.classList.remove("rainbow");
+     secondArtistScore.innerHTML = ""
+     firstArtistScore.innerHTML = ""
+   }
+   if (firstArtistPopularity === secondArtistPopularity) {
+     secondArtistScore.innerHTML = "<b>DRAW!</b> The artists popularity is the same: <b>" + secondArtistPopularity + "</b>"
+     firstArtistScore.innerHTML = "<b>DRAW!</b> The artists popularity is the same: <b>" + firstArtistPopularity + "</b>"
    }
  }
 

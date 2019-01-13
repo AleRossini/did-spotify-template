@@ -12,7 +12,6 @@ h1 {
   text-transform: uppercase;
   padding: 30px 45px;
   border: 2px solid;
-  width: 70%;
   border-radius: 5px;
 }
 
@@ -95,10 +94,13 @@ figure {
 .self_center {
   align-self: center;
 }
+.self_end {
+  align-self: flex-end;
+}
 .wrapper {
   margin: auto;
   height: inherit;
-  max-width: 960px;
+  max-width: 800px;
 }
 
 /* ids and class */
@@ -107,7 +109,7 @@ figure {
   margin: 0;
 }
 .logo_sm {
-  max-width: 10%;
+  max-width: 15%;
   max-height: auto;
 }
 .added_margin_bottom {
@@ -115,6 +117,9 @@ figure {
 }
 .added_margin_top {
   margin-top: 45px;
+}
+.added_margin_side {
+  margin: 0 20px;
 }
 button:hover, .rainbow {
     color: #e2e2e2;
