@@ -2,7 +2,7 @@ import {generateRandomString} from "../helpers/url.js";
 import {STATE_KEY, BASE_URL, CLIENT_ID} from "../helpers/constants.js";
 
 document.getElementById('login-button').addEventListener('click', () => {
-    const redirect_uri = `${BASE_URL}/battle/`; // Your redirect uri
+    const redirect_uri = `${BASE_URL}battle/`; // Your redirect uri
     const state = generateRandomString(16);
     const scope = 'user-read-private user-read-email';
     localStorage.setItem(STATE_KEY, state);
