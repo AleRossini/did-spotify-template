@@ -121,8 +121,6 @@ secondTypedArtist.onkeyup = function () {
    } else {
      secondArtistImg.style.opacity = "1";
      firstArtistName.classList.remove("rainbow");
-     secondArtistScore.innerHTML = ""
-     firstArtistScore.innerHTML = ""
    }
    if (secondArtistPopularity > firstArtistPopularity) {
      firstArtistImg.style.opacity = "0.3";
@@ -132,8 +130,6 @@ secondTypedArtist.onkeyup = function () {
    } else {
      firstArtistImg.style.opacity = "1";
      secondArtistName.classList.remove("rainbow");
-     secondArtistScore.innerHTML = ""
-     firstArtistScore.innerHTML = ""
    }
    if (firstArtistPopularity === secondArtistPopularity) {
      secondArtistScore.innerHTML = "<b>DRAW!</b> The artists popularity is the same: <b>" + secondArtistPopularity + "</b>"
